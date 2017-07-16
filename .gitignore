@@ -1,2 +1,5 @@
 *.sw*
 nimcache
+
+# Binaries
+core_basic_window
