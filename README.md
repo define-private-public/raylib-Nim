@@ -1,3 +1,5 @@
+Bindings for raylib: http://raylib.com
+
 Official repo here: https://gitlab.com/define-private-public/raylib-Nim
 
 Treat other places as mirrors, but issues can still be logged on the GitHub
