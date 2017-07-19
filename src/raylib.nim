@@ -1,9 +1,7 @@
 
 # TODO windows & OS X bindings
 const LIB_RAYLIB* = "libraylib.so"
-#const LIB_RAYLIB* = "libraylib.a"
-{.passL: "-lraylib -lglfw3 -lGL -lopenal -lm -lpthread -ldl -lX11 -lXrandr -lXinerama -lXxf86vm -lXcursor".}
-#{.passL: "-lraylib".}
+{.passL: "-L. -lraylib -lglfw3 -lGL -lopenal -lm -lpthread -ldl -lX11 -lXrandr -lXinerama -lXxf86vm -lXcursor".}
 
 
 const
