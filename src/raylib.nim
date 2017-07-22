@@ -6,8 +6,9 @@ when defined(macosx):
 else:
   # Linux
   const LIB_RAYLIB* = "libraylib.so"
-  {.passL: "-L. -lraylib -lglfw3 -lGL -lopenal -lm -lpthread -ldl -lX11 -lXrandr -lXinerama -lXxf86vm -lXcursor".}
+  {.passL: "-lglfw -lGL -lopenal -lm -lpthread -ldl -lX11 -lXrandr -lXinerama -lXxf86vm -lXcursor".}
 
+  {.deadCodeElim: on.}
 
 # TODO windows
 
