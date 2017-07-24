@@ -1,3 +1,4 @@
+from strutils import intToStr
 import raylib as rl
 
 type
@@ -49,10 +50,12 @@ proc main()=
     
     for i in 0..<bunniesCount:
       rl.DrawTexture(texBunny, bunnies[i].position.x.cint, bunnies[i].position.y.cint, rl.RAYWHITE)
+
+    var bunniesCountStr = "bunnies: " & intToStr(bunniesCount)
     
     rl.DrawRectangle(0, 0, screenWidth, 40, rl.LIGHTGRAY)
-#    rl.DrawText("raylib bunnymark", 10, 10, 20, rl.DARKGRAY)
-#    rl.DrawText(rl.FormatText("bunnies: %i", bunniesCount), 400, 10, 20, rl.RED)
+    rl.DrawText("raylib bunnymark", 10, 10, 20, rl.DARKGRAY)
+    rl.DrawText(bunniesCountStr, 400, 10, 20, rl.RED)
     
     rl.DrawFPS(260, 10)
 
