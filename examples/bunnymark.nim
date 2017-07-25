@@ -38,10 +38,10 @@ proc main()=
       bunnies[i].position.x += bunnies[i].speed.x
       bunnies[i].position.y += bunnies[i].speed.y
 
-#      if ((bunnies[i].position.x > rl.GetScreenWidth()) or (bunnies[i].position.x < 0)):
-#        bunnies[i].speed.x *= -1
-#      if ((bunnies[i].position.y > rl.GetScreenHeight()) or (bunnies[i].position.y < 0)):
-#        bunnies[i].speed.y *= -1
+      if (bunnies[i].position.x > rl.GetScreenWidth().float) or (bunnies[i].position.x < 0.0):
+        bunnies[i].speed.x *= -1
+      if (bunnies[i].position.y > rl.GetScreenHeight().float) or (bunnies[i].position.y < 0.0):
+        bunnies[i].speed.y *= -1
    
     # Draw
     rl.BeginDrawing()
