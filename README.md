@@ -5,6 +5,15 @@ Official repo here: https://gitlab.com/define-private-public/raylib-Nim
 Treat other places as mirrors, but issues can still be logged on the GitHub
 mirror.
 
+====
+Static Compile branch
+====
+
+This will compile raylib into the Nim binary directly from the RayLib source.
+To do this, grab a copy of the raylib source and drop it into `src/raylib_src/`
+before running `nimble install`.
+
+
 Notes:
 - You must use `raylib` as a shared library
   - build it from their `develop` branch

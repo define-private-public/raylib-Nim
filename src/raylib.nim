@@ -12,6 +12,18 @@ else:
 
 # TODO windows
 
+# Manually (statically) compile in raylib...  Absolutely disgusting...
+{.compile: "raylib_src/external/stb_vorbis.c".}
+{.compile: "raylib_src/audio.c".}
+{.compile: "raylib_src/core.c".}
+{.compile: "raylib_src/models.c".}
+{.compile: "raylib_src/rlgl.c".}
+{.compile: "raylib_src/shapes.c".}
+{.compile: "raylib_src/text.c".}
+{.compile: "raylib_src/textures.c".}
+{.compile: "raylib_src/utils.c".}
+
+
 
 const
   FLAG_SHOW_LOGO* = 1
@@ -560,215 +572,215 @@ type
 ##  Window-related functions
 
 proc InitWindow*(width: cint; height: cint; title: cstring)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Initialize window and OpenGL context
 
 proc CloseWindow*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Close window and unload OpenGL context
 
 proc WindowShouldClose*(): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if KEY_ESCAPE pressed or Close icon pressed
 
 proc IsWindowMinimized*(): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if window has been minimized (or lost focus)
 
 proc ToggleFullscreen*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Toggle fullscreen mode (only PLATFORM_DESKTOP)
 
 proc SetWindowIcon*(image: Image)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set icon for window (only PLATFORM_DESKTOP)
 
 proc SetWindowPosition*(x: cint; y: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set window position on screen (only PLATFORM_DESKTOP)
 
 proc SetWindowMonitor*(monitor: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set monitor for the current window (fullscreen mode)
 
 proc SetWindowMinSize*(width: cint; height: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
 
 proc GetScreenWidth*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get current screen width
 
 proc GetScreenHeight*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get current screen height
 ##  Cursor-related functions
 
 proc ShowCursor*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Shows cursor
 
 proc HideCursor*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Hides cursor
 
 proc IsCursorHidden*(): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if cursor is not visible
 
 proc EnableCursor*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Enables cursor (unlock cursor)
 
 proc DisableCursor*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Disables cursor (lock cursor)
 ##  Drawing-related functions
 
 proc ClearBackground*(color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set background color (framebuffer clear color)
 
 proc BeginDrawing*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Setup canvas (framebuffer) to start drawing
 
 proc EndDrawing*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  End canvas drawing and swap buffers (double buffering)
 
 proc Begin2dMode*(camera: Camera2D)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Initialize 2D mode with custom camera (2D)
 
 proc End2dMode*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Ends 2D mode with custom camera
 
 proc Begin3dMode*(camera: Camera)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Initializes 3D mode with custom camera (3D)
 
 proc End3dMode*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Ends 3D mode and returns to default 2D orthographic mode
 
 proc BeginTextureMode*(target: RenderTexture2D)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Initializes render texture for drawing
 
 proc EndTextureMode*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Ends drawing to render texture
 ##  Screen-space-related functions
 
 proc GetMouseRay*(mousePosition: Vector2; camera: Camera): Ray
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns a ray trace from mouse position
 
 proc GetWorldToScreen*(position: Vector3; camera: Camera): Vector2
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns the screen space position for a 3d world space position
 
 proc GetCameraMatrix*(camera: Camera): Matrix
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns camera transform matrix (view matrix)
 ##  Timming-related functions
 
 proc SetTargetFPS*(fps: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set target FPS (maximum)
 
 proc GetFPS*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns current FPS
 
 proc GetFrameTime*(): cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns time in seconds for last frame drawn
 ##  Color-related functions
 
 proc GetHexValue*(color: Color): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns hexadecimal value for a Color
 
 proc GetColor*(hexValue: cint): Color
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns a Color struct from hexadecimal value
 
 proc Fade*(color: Color; alpha: cfloat): Color
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Color fade-in or fade-out, alpha goes from 0.0f to 1.0f
 
 proc ColorToFloat*(color: Color): ptr cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Converts Color to float array and normalizes
 
 proc VectorToFloat*(vec: Vector3): ptr cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Converts Vector3 to float array
 
 proc MatrixToFloat*(mat: Matrix): ptr cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Converts Matrix to float array
 ##  Misc. functions
 
 proc ShowLogo*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Activate raylib logo at startup (can be done with flags)
 
 proc SetConfigFlags*(flags: char)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Setup window configuration flags (view FLAGS)
 
 #proc TraceLog*(logType: cint; text: cstring) {.varargs.}
-#  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+#  {.importc.}
 ##  Show trace log messages (INFO, WARNING, ERROR, DEBUG)
 
 proc TakeScreenshot*(fileName: cstring)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Takes a screenshot of current screen (saved a .png)
 
 proc GetRandomValue*(min: cint; max: cint): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns a random value between min and max (both included)
 ##  Files management functions
 
 proc IsFileExtension*(fileName: cstring; ext: cstring): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check file extension
 
 proc GetDirectoryPath*(fileName: cstring): cstring
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get directory for a given fileName (with path)
 
 proc GetWorkingDirectory*(): cstring
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get current working directory
 
 proc ChangeDirectory*(dir: cstring): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Change working directory, returns true if success
 
 proc IsFileDropped*(): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if a file has been dropped into window
 
 proc GetDroppedFiles*(count: ptr cint): cstringArray
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get dropped files names
 
 proc ClearDroppedFiles*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Clear dropped files paths buffer
 ##  Persistent storage management
 
 proc StorageSaveValue*(position: cint; value: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Save integer value to storage file (to defined position)
 
 proc StorageLoadValue*(position: cint): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load integer value from storage file (from defined position)
 ## ------------------------------------------------------------------------------------
 ##  Input Handling Functions (Module: core)
@@ -776,185 +788,185 @@ proc StorageLoadValue*(position: cint): cint
 ##  Input-related functions: keyboard
 
 proc IsKeyPressed*(key: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a key has been pressed once
 
 proc IsKeyDown*(key: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a key is being pressed
 
 proc IsKeyReleased*(key: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a key has been released once
 
 proc IsKeyUp*(key: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a key is NOT being pressed
 
 proc GetKeyPressed*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get latest key pressed
 
 proc SetExitKey*(key: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set a custom key to exit program (default is ESC)
 ##  Input-related functions: gamepads
 
 proc IsGamepadAvailable*(gamepad: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a gamepad is available
 
 proc IsGamepadName*(gamepad: cint; name: cstring): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check gamepad name (if available)
 
 proc GetGamepadName*(gamepad: cint): cstring
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Return gamepad internal name id
 
 proc IsGamepadButtonPressed*(gamepad: cint; button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a gamepad button has been pressed once
 
 proc IsGamepadButtonDown*(gamepad: cint; button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a gamepad button is being pressed
 
 proc IsGamepadButtonReleased*(gamepad: cint; button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a gamepad button has been released once
 
 proc IsGamepadButtonUp*(gamepad: cint; button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a gamepad button is NOT being pressed
 
 proc GetGamepadButtonPressed*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get the last gamepad button pressed
 
 proc GetGamepadAxisCount*(gamepad: cint): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Return gamepad axis count for a gamepad
 
 proc GetGamepadAxisMovement*(gamepad: cint; axis: cint): cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Return axis movement value for a gamepad axis
 ##  Input-related functions: mouse
 
 proc IsMouseButtonPressed*(button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a mouse button has been pressed once
 
 proc IsMouseButtonDown*(button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a mouse button is being pressed
 
 proc IsMouseButtonReleased*(button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a mouse button has been released once
 
 proc IsMouseButtonUp*(button: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if a mouse button is NOT being pressed
 
 proc GetMouseX*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns mouse position X
 
 proc GetMouseY*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns mouse position Y
 
 proc GetMousePosition*(): Vector2
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns mouse position XY
 
 proc SetMousePosition*(position: Vector2)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set mouse position XY
 
 proc GetMouseWheelMove*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns mouse wheel movement Y
 ##  Input-related functions: touch
 
 proc GetTouchX*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns touch position X for touch point 0 (relative to screen size)
 
 proc GetTouchY*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns touch position Y for touch point 0 (relative to screen size)
 
 proc GetTouchPosition*(index: cint): Vector2
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Returns touch position XY for a touch point index (relative to screen size)
 ## ------------------------------------------------------------------------------------
 ##  Gestures and Touch Handling Functions (Module: gestures)
 ## ------------------------------------------------------------------------------------
 
 proc SetGesturesEnabled*(gestureFlags: cuint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Enable a set of gestures using flags
 
 proc IsGestureDetected*(gesture: cint): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if a gesture have been detected
 
 proc GetGestureDetected*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get latest detected gesture
 
 proc GetTouchPointsCount*(): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get touch points count
 
 proc GetGestureHoldDuration*(): cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get gesture hold time in milliseconds
 
 proc GetGestureDragVector*(): Vector2
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get gesture drag vector
 
 proc GetGestureDragAngle*(): cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get gesture drag angle
 
 proc GetGesturePinchVector*(): Vector2
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get gesture pinch delta
 
 proc GetGesturePinchAngle*(): cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get gesture pinch angle
 ## ------------------------------------------------------------------------------------
 ##  Camera System Functions (Module: camera)
 ## ------------------------------------------------------------------------------------
 
 proc SetCameraMode*(camera: Camera; mode: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set camera mode (multiple camera modes available)
 
 proc UpdateCamera*(camera: ptr Camera)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Update camera position for selected mode
 
 proc SetCameraPanControl*(panKey: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set camera pan key to combine with mouse movement (free camera)
 
 proc SetCameraAltControl*(altKey: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set camera alt key to combine with mouse movement (free camera)
 
 proc SetCameraSmoothZoomControl*(szKey: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set camera smooth zoom key to combine with mouse (free camera)
 
 proc SetCameraMoveControls*(frontKey: cint; backKey: cint; rightKey: cint;
                            leftKey: cint; upKey: cint; downKey: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set camera move controls (1st person and 3rd person cameras)
 ## ------------------------------------------------------------------------------------
 ##  Basic Shapes Drawing Functions (Module: shapes)
@@ -962,121 +974,121 @@ proc SetCameraMoveControls*(frontKey: cint; backKey: cint; rightKey: cint;
 ##  Basic shapes drawing functions
 
 proc DrawPixel*(posX: cint; posY: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a pixel
 
 proc DrawPixelV*(position: Vector2; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a pixel (Vector version)
 
 proc DrawLine*(startPosX: cint; startPosY: cint; endPosX: cint; endPosY: cint;
               color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a line
 
 proc DrawLineV*(startPos: Vector2; endPos: Vector2; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a line (Vector version)
 
 proc DrawLineEx*(startPos: Vector2; endPos: Vector2; thick: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a line defining thickness
 
 proc DrawLineBezier*(startPos: Vector2; endPos: Vector2; thick: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a line using cubic-bezier curves in-out
 
 proc DrawCircle*(centerX: cint; centerY: cint; radius: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a color-filled circle
 
 proc DrawCircleGradient*(centerX: cint; centerY: cint; radius: cfloat; color1: Color;
                         color2: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a gradient-filled circle
 
 proc DrawCircleV*(center: Vector2; radius: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a color-filled circle (Vector version)
 
 proc DrawCircleLines*(centerX: cint; centerY: cint; radius: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw circle outline
 
 proc DrawRectangle*(posX: cint; posY: cint; width: cint; height: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a color-filled rectangle
 
 proc DrawRectangleRec*(rec: Rectangle; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a color-filled rectangle
 
 proc DrawRectanglePro*(rec: Rectangle; origin: Vector2; rotation: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a color-filled rectangle with pro parameters
 
 proc DrawRectangleGradient*(posX: cint; posY: cint; width: cint; height: cint;
                            color1: Color; color2: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a gradient-filled rectangle
 
 proc DrawRectangleV*(position: Vector2; size: Vector2; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a color-filled rectangle (Vector version)
 
 proc DrawRectangleLines*(posX: cint; posY: cint; width: cint; height: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw rectangle outline
 
 proc DrawTriangle*(v1: Vector2; v2: Vector2; v3: Vector2; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a color-filled triangle
 
 proc DrawTriangleLines*(v1: Vector2; v2: Vector2; v3: Vector2; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw triangle outline
 
 proc DrawPoly*(center: Vector2; sides: cint; radius: cfloat; rotation: cfloat;
               color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a regular polygon (Vector version)
 
 proc DrawPolyEx*(points: ptr Vector2; numPoints: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a closed polygon defined by points
 
 proc DrawPolyExLines*(points: ptr Vector2; numPoints: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw polygon lines
 ##  Basic shapes collision detection functions
 
 proc CheckCollisionRecs*(rec1: Rectangle; rec2: Rectangle): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check collision between two rectangles
 
 proc CheckCollisionCircles*(center1: Vector2; radius1: cfloat; center2: Vector2;
                            radius2: cfloat): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check collision between two circles
 
 proc CheckCollisionCircleRec*(center: Vector2; radius: cfloat; rec: Rectangle): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check collision between circle and rectangle
 
 proc GetCollisionRec*(rec1: Rectangle; rec2: Rectangle): Rectangle
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get collision rectangle for two rectangles collision
 
 proc CheckCollisionPointRec*(point: Vector2; rec: Rectangle): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if point is inside rectangle
 
 proc CheckCollisionPointCircle*(point: Vector2; center: Vector2; radius: cfloat): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if point is inside circle
 
 proc CheckCollisionPointTriangle*(point: Vector2; p1: Vector2; p2: Vector2; p3: Vector2): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if point is inside a triangle
 ## ------------------------------------------------------------------------------------
 ##  Texture Loading and Drawing Functions (Module: textures)
@@ -1084,177 +1096,177 @@ proc CheckCollisionPointTriangle*(point: Vector2; p1: Vector2; p2: Vector2; p3: 
 ##  Image/Texture2D data loading/unloading functions
 
 proc LoadImage*(fileName: cstring): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load image from file into CPU memory (RAM)
 
 proc LoadImageEx*(pixels: ptr Color; width: cint; height: cint): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load image from Color array data (RGBA - 32bit)
 
 proc LoadImagePro*(data: pointer; width: cint; height: cint; format: cint): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load image from raw data with parameters
 
 proc LoadImageRaw*(fileName: cstring; width: cint; height: cint; format: cint;
                   headerSize: cint): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load image from RAW file data
 
 proc LoadTexture*(fileName: cstring): Texture2D
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load texture from file into GPU memory (VRAM)
 
 proc LoadTextureFromImage*(image: Image): Texture2D
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load texture from image data
 
 proc LoadRenderTexture*(width: cint; height: cint): RenderTexture2D
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load texture for rendering (framebuffer)
 
 proc UnloadImage*(image: Image)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload image from CPU memory (RAM)
 
 proc UnloadTexture*(texture: Texture2D)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload texture from GPU memory (VRAM)
 
 proc UnloadRenderTexture*(target: RenderTexture2D)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload render texture from GPU memory (VRAM)
 
 proc GetImageData*(image: Image): ptr Color
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get pixel data from image as a Color struct array
 
 proc GetTextureData*(texture: Texture2D): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get pixel data from GPU texture and return an Image
 
 proc UpdateTexture*(texture: Texture2D; pixels: pointer)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Update GPU texture with new data
 ##  Image manipulation functions
 
 proc ImageToPOT*(image: ptr Image; fillColor: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Convert image to POT (power-of-two)
 
 proc ImageFormat*(image: ptr Image; newFormat: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Convert image data to desired format
 
 proc ImageAlphaMask*(image: ptr Image; alphaMask: Image)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Apply alpha mask to image
 
 proc ImageDither*(image: ptr Image; rBpp: cint; gBpp: cint; bBpp: cint; aBpp: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Dither image data to 16bpp or lower (Floyd-Steinberg dithering)
 
 proc ImageCopy*(image: Image): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Create an image duplicate (useful for transformations)
 
 proc ImageCrop*(image: ptr Image; crop: Rectangle)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Crop an image to a defined rectangle
 
 proc ImageResize*(image: ptr Image; newWidth: cint; newHeight: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Resize and image (bilinear filtering)
 
 proc ImageResizeNN*(image: ptr Image; newWidth: cint; newHeight: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Resize and image (Nearest-Neighbor scaling algorithm)
 
 proc ImageText*(text: cstring; fontSize: cint; color: Color): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Create an image from text (default font)
 
 proc ImageTextEx*(font: SpriteFont; text: cstring; fontSize: cfloat; spacing: cint;
                  tint: Color): Image
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Create an image from text (custom sprite font)
 
 proc ImageDraw*(dst: ptr Image; src: Image; srcRec: Rectangle; dstRec: Rectangle)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a source image within a destination image
 
 proc ImageDrawText*(dst: ptr Image; position: Vector2; text: cstring; fontSize: cint;
                    color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw text (default font) within an image (destination)
 
 proc ImageDrawTextEx*(dst: ptr Image; position: Vector2; font: SpriteFont;
                      text: cstring; fontSize: cfloat; spacing: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw text (custom sprite font) within an image (destination)
 
 proc ImageFlipVertical*(image: ptr Image)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Flip image vertically
 
 proc ImageFlipHorizontal*(image: ptr Image)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Flip image horizontally
 
 proc ImageColorTint*(image: ptr Image; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Modify image color: tint
 
 proc ImageColorInvert*(image: ptr Image)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Modify image color: invert
 
 proc ImageColorGrayscale*(image: ptr Image)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Modify image color: grayscale
 
 proc ImageColorContrast*(image: ptr Image; contrast: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Modify image color: contrast (-100 to 100)
 
 proc ImageColorBrightness*(image: ptr Image; brightness: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Modify image color: brightness (-255 to 255)
 ##  Texture2D configuration functions
 
 proc GenTextureMipmaps*(texture: ptr Texture2D)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Generate GPU mipmaps for a texture
 
 proc SetTextureFilter*(texture: Texture2D; filterMode: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set texture scaling filter mode
 
 proc SetTextureWrap*(texture: Texture2D; wrapMode: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set texture wrapping mode
 ##  Texture2D drawing functions
 
 proc DrawTexture*(texture: Texture2D; posX: cint; posY: cint; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a Texture2D
 
 proc DrawTextureV*(texture: Texture2D; position: Vector2; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a Texture2D with position defined as Vector2
 
 proc DrawTextureEx*(texture: Texture2D; position: Vector2; rotation: cfloat;
                    scale: cfloat; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a Texture2D with extended parameters
 
 proc DrawTextureRec*(texture: Texture2D; sourceRec: Rectangle; position: Vector2;
                     tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a part of a texture defined by a rectangle
 
 proc DrawTexturePro*(texture: Texture2D; sourceRec: Rectangle; destRec: Rectangle;
                     origin: Vector2; rotation: cfloat; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
   ##  Draw a part of a texture defined by a rectangle with 'pro' parameters
 ## ------------------------------------------------------------------------------------
 ##  Font Loading and Text Drawing Functions (Module: text)
@@ -1262,52 +1274,52 @@ proc DrawTexturePro*(texture: Texture2D; sourceRec: Rectangle; destRec: Rectangl
 ##  SpriteFont loading/unloading functions
 
 proc GetDefaultFont*(): SpriteFont
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get the default SpriteFont
 
 proc LoadSpriteFont*(fileName: cstring): SpriteFont
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load SpriteFont from file into GPU memory (VRAM)
 
 proc LoadSpriteFontEx*(fileName: cstring; fontSize: cint; charsCount: cint;
                       fontChars: ptr cint): SpriteFont
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load SpriteFont from file with extended parameters
 
 proc UnloadSpriteFont*(spriteFont: SpriteFont)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload SpriteFont from GPU memory (VRAM)
 ##  Text drawing functions
 
 proc DrawFPS*(posX: cint; posY: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Shows current FPS
 
 proc DrawText*(text: cstring; posX: cint; posY: cint; fontSize: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw text (using default font)
 
 proc DrawTextEx*(spriteFont: SpriteFont; text: cstring; position: Vector2;
                 fontSize: cfloat; spacing: cint; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
   ##  Draw text using SpriteFont and additional parameters
 ##  Text misc. functions
 
 proc MeasureText*(text: cstring; fontSize: cint): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Measure string width for default font
 
 proc MeasureTextEx*(spriteFont: SpriteFont; text: cstring; fontSize: cfloat;
                    spacing: cint): Vector2
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Measure string size for SpriteFont
 
 #proc FormatText*(text: cstring): cstring {.varargs.}
-#  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+#  {.importc.}
 ##  Formatting of text with variables to 'embed'
 
 proc SubText*(text: cstring; position: cint; length: cint): cstring
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get a piece of a text string
 ## ------------------------------------------------------------------------------------
 ##  Basic 3d Shapes Drawing Functions (Module: models)
@@ -1315,71 +1327,71 @@ proc SubText*(text: cstring; position: cint; length: cint): cstring
 ##  Basic geometric 3D shapes drawing functions
 
 proc DrawLine3D*(startPos: Vector3; endPos: Vector3; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a line in 3D world space
 
 proc DrawCircle3D*(center: Vector3; radius: cfloat; rotationAxis: Vector3;
                   rotationAngle: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a circle in 3D world space
 
 proc DrawCube*(position: Vector3; width: cfloat; height: cfloat; length: cfloat;
               color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw cube
 
 proc DrawCubeV*(position: Vector3; size: Vector3; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw cube (Vector version)
 
 proc DrawCubeWires*(position: Vector3; width: cfloat; height: cfloat; length: cfloat;
                    color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw cube wires
 
 proc DrawCubeTexture*(texture: Texture2D; position: Vector3; width: cfloat;
                      height: cfloat; length: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw cube textured
 
 proc DrawSphere*(centerPos: Vector3; radius: cfloat; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw sphere
 
 proc DrawSphereEx*(centerPos: Vector3; radius: cfloat; rings: cint; slices: cint;
                   color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw sphere with extended parameters
 
 proc DrawSphereWires*(centerPos: Vector3; radius: cfloat; rings: cint; slices: cint;
                      color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw sphere wires
 
 proc DrawCylinder*(position: Vector3; radiusTop: cfloat; radiusBottom: cfloat;
                   height: cfloat; slices: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a cylinder/cone
 
 proc DrawCylinderWires*(position: Vector3; radiusTop: cfloat; radiusBottom: cfloat;
                        height: cfloat; slices: cint; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a cylinder/cone wires
 
 proc DrawPlane*(centerPos: Vector3; size: Vector2; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a plane XZ
 
 proc DrawRay*(ray: Ray; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a ray line
 
 proc DrawGrid*(slices: cint; spacing: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a grid (centered at (0, 0, 0))
 
 proc DrawGizmo*(position: Vector3)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw simple gizmo
 ## DrawTorus(), DrawTeapot() could be useful?
 ## ------------------------------------------------------------------------------------
@@ -1388,126 +1400,126 @@ proc DrawGizmo*(position: Vector3)
 ##  Model loading/unloading functions
 
 proc LoadMesh*(fileName: cstring): Mesh
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load mesh from file
 
 proc LoadMeshEx*(numVertex: cint; vData: ptr cfloat; vtData: ptr cfloat;
                 vnData: ptr cfloat; cData: ptr Color): Mesh
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load mesh from vertex data
 
 proc LoadModel*(fileName: cstring): Model
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load model from file
 
 proc LoadModelFromMesh*(data: Mesh; dynamic: bool): Model
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load model from mesh data
 
 proc LoadHeightmap*(heightmap: Image; size: Vector3): Model
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load heightmap model from image data
 
 proc LoadCubicmap*(cubicmap: Image): Model
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load cubes-based map model from image data
 
 proc UnloadMesh*(mesh: ptr Mesh)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload mesh from memory (RAM and/or VRAM)
 
 proc UnloadModel*(model: Model)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload model from memory (RAM and/or VRAM)
 ##  Material loading/unloading functions
 
 proc LoadMaterial*(fileName: cstring): Material
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load material from file
 
 proc LoadDefaultMaterial*(): Material
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load default material (uses default models shader)
 
 proc UnloadMaterial*(material: Material)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload material from GPU memory (VRAM)
 ##  Model drawing functions
 
 proc DrawModel*(model: Model; position: Vector3; scale: cfloat; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a model (with texture if set)
 
 proc DrawModelEx*(model: Model; position: Vector3; rotationAxis: Vector3;
                  rotationAngle: cfloat; scale: Vector3; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a model with extended parameters
 
 proc DrawModelWires*(model: Model; position: Vector3; scale: cfloat; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a model wires (with texture if set)
 
 proc DrawModelWiresEx*(model: Model; position: Vector3; rotationAxis: Vector3;
                       rotationAngle: cfloat; scale: Vector3; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a model wires (with texture if set) with extended parameters
 
 proc DrawBoundingBox*(box: BoundingBox; color: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw bounding box (wires)
 
 proc DrawBillboard*(camera: Camera; texture: Texture2D; center: Vector3; size: cfloat;
                    tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a billboard texture
 
 proc DrawBillboardRec*(camera: Camera; texture: Texture2D; sourceRec: Rectangle;
                       center: Vector3; size: cfloat; tint: Color)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Draw a billboard texture defined by sourceRec
 ##  Collision detection functions
 
 proc CalculateBoundingBox*(mesh: Mesh): BoundingBox
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Calculate mesh bounding box limits
 
 proc CheckCollisionSpheres*(centerA: Vector3; radiusA: cfloat; centerB: Vector3;
                            radiusB: cfloat): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect collision between two spheres
 
 proc CheckCollisionBoxes*(box1: BoundingBox; box2: BoundingBox): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect collision between two bounding boxes
 
 proc CheckCollisionBoxSphere*(box: BoundingBox; centerSphere: Vector3;
                              radiusSphere: cfloat): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect collision between box and sphere
 
 proc CheckCollisionRaySphere*(ray: Ray; spherePosition: Vector3; sphereRadius: cfloat): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect collision between ray and sphere
 
 proc CheckCollisionRaySphereEx*(ray: Ray; spherePosition: Vector3;
                                sphereRadius: cfloat; collisionPoint: ptr Vector3): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect collision between ray and sphere, returns collision point
 
 proc CheckCollisionRayBox*(ray: Ray; box: BoundingBox): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect collision between ray and box
 
 proc GetCollisionRayMesh*(ray: Ray; mesh: ptr Mesh): RayHitInfo
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get collision info between ray and mesh
 
 proc GetCollisionRayTriangle*(ray: Ray; p1: Vector3; p2: Vector3; p3: Vector3): RayHitInfo
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get collision info between ray and triangle
 
 proc GetCollisionRayGround*(ray: Ray; groundHeight: cfloat): RayHitInfo
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get collision info between ray and ground plane (Y-normal plane)
 ## ------------------------------------------------------------------------------------
 ##  Shaders System Functions (Module: rlgl)
@@ -1516,94 +1528,94 @@ proc GetCollisionRayGround*(ray: Ray; groundHeight: cfloat): RayHitInfo
 ##  Shader loading/unloading functions
 
 proc LoadText*(fileName: cstring): cstring
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load chars array from text file
 
 proc LoadShader*(vsFileName: cstring; fsFileName: cstring): Shader
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load shader from files and bind default locations
 
 proc UnloadShader*(shader: Shader)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload shader from GPU memory (VRAM)
 
 proc GetDefaultShader*(): Shader
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get default shader
 
 proc GetDefaultTexture*(): Texture2D
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get default texture
 ##  Shader configuration functions
 
 proc GetShaderLocation*(shader: Shader; uniformName: cstring): cint
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get shader uniform location
 
 proc SetShaderValue*(shader: Shader; uniformLoc: cint; value: ptr cfloat; size: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set shader uniform value (float)
 
 proc SetShaderValuei*(shader: Shader; uniformLoc: cint; value: ptr cint; size: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set shader uniform value (int)
 
 proc SetShaderValueMatrix*(shader: Shader; uniformLoc: cint; mat: Matrix)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set shader uniform value (matrix 4x4)
 
 proc SetMatrixProjection*(proj: Matrix)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set a custom projection matrix (replaces internal projection matrix)
 
 proc SetMatrixModelview*(view: Matrix)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set a custom modelview matrix (replaces internal modelview matrix)
 ##  Shading begin/end functions
 
 proc BeginShaderMode*(shader: Shader)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Begin custom shader drawing
 
 proc EndShaderMode*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  End custom shader drawing (use default shader)
 
 proc BeginBlendMode*(mode: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Begin blending mode (alpha, additive, multiplied)
 
 proc EndBlendMode*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  End blending mode (reset to default: alpha blending)
 ##  VR control functions
 
 proc InitVrSimulator*(vrDevice: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Init VR simulator for selected device
 
 proc CloseVrSimulator*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Close VR simulator for current device
 
 proc IsVrSimulatorReady*(): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Detect if VR simulator is ready
 
 proc UpdateVrTracking*(camera: ptr Camera)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Update VR tracking (position and orientation) and camera
 
 proc ToggleVrMode*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Enable/Disable VR experience
 
 proc BeginVrDrawing*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Begin VR simulator stereo rendering
 
 proc EndVrDrawing*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  End VR simulator stereo rendering
 ## ------------------------------------------------------------------------------------
 ##  Audio Loading and Playing Functions (Module: audio)
@@ -1611,180 +1623,180 @@ proc EndVrDrawing*()
 ##  Audio device management functions
 
 proc InitAudioDevice*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Initialize audio device and context
 
 proc CloseAudioDevice*()
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Close the audio device and context
 
 proc IsAudioDeviceReady*(): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if audio device has been initialized successfully
 
 proc SetMasterVolume*(volume: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set master volume (listener)
 ##  Wave/Sound loading/unloading functions
 
 proc LoadWave*(fileName: cstring): Wave
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load wave data from file
 
 proc LoadWaveEx*(data: pointer; sampleCount: cint; sampleRate: cint; sampleSize: cint;
                 channels: cint): Wave
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load wave data from raw array data
 
 proc LoadSound*(fileName: cstring): Sound
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load sound from file
 
 proc LoadSoundFromWave*(wave: Wave): Sound
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load sound from wave data
 
 proc UpdateSound*(sound: Sound; data: pointer; samplesCount: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Update sound buffer with new data
 
 proc UnloadWave*(wave: Wave)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload wave data
 
 proc UnloadSound*(sound: Sound)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload sound
 ##  Wave/Sound management functions
 
 proc PlaySound*(sound: Sound)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Play a sound
 
 proc PauseSound*(sound: Sound)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Pause a sound
 
 proc ResumeSound*(sound: Sound)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Resume a paused sound
 
 proc StopSound*(sound: Sound)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Stop playing a sound
 
 proc IsSoundPlaying*(sound: Sound): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if a sound is currently playing
 
 proc SetSoundVolume*(sound: Sound; volume: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set volume for a sound (1.0 is max level)
 
 proc SetSoundPitch*(sound: Sound; pitch: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set pitch for a sound (1.0 is base level)
 
 proc WaveFormat*(wave: ptr Wave; sampleRate: cint; sampleSize: cint; channels: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Convert wave data to desired format
 
 proc WaveCopy*(wave: Wave): Wave
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Copy a wave to a new wave
 
 proc WaveCrop*(wave: ptr Wave; initSample: cint; finalSample: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Crop a wave to defined samples range
 
 proc GetWaveData*(wave: Wave): ptr cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get samples data from wave as a floats array
 ##  Music management functions
 
 proc LoadMusicStream*(fileName: cstring): Music
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Load music stream from file
 
 proc UnloadMusicStream*(music: Music)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Unload music stream
 
 proc PlayMusicStream*(music: Music)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Start music playing
 
 proc UpdateMusicStream*(music: Music)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Updates buffers for music streaming
 
 proc StopMusicStream*(music: Music)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Stop music playing
 
 proc PauseMusicStream*(music: Music)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Pause music playing
 
 proc ResumeMusicStream*(music: Music)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Resume playing paused music
 
 proc IsMusicPlaying*(music: Music): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if music is playing
 
 proc SetMusicVolume*(music: Music; volume: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set volume for music (1.0 is max level)
 
 proc SetMusicPitch*(music: Music; pitch: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set pitch for a music (1.0 is base level)
 
 proc SetMusicLoopCount*(music: Music; count: cfloat)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Set music loop count (loop repeats)
 
 proc GetMusicTimeLength*(music: Music): cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get music time length (in seconds)
 
 proc GetMusicTimePlayed*(music: Music): cfloat
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Get current music time played (in seconds)
 ##  AudioStream management functions
 
 proc InitAudioStream*(sampleRate: cuint; sampleSize: cuint; channels: cuint): AudioStream
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Init audio stream (to stream raw audio pcm data)
 
 proc UpdateAudioStream*(stream: AudioStream; data: pointer; samplesCount: cint)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Update audio stream buffers with data
 
 proc CloseAudioStream*(stream: AudioStream)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Close audio stream and free memory
 
 proc IsAudioBufferProcessed*(stream: AudioStream): bool
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Check if any audio stream buffers requires refill
 
 proc PlayAudioStream*(stream: AudioStream)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Play audio stream
 
 proc PauseAudioStream*(stream: AudioStream)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Pause audio stream
 
 proc ResumeAudioStream*(stream: AudioStream)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Resume audio stream
 
 proc StopAudioStream*(stream: AudioStream)
-  {.cdecl, importc, dynlib: LIB_RAYLIB.}
+  {.importc.}
 ##  Stop audio stream
 
 ##  Some Basic Colors

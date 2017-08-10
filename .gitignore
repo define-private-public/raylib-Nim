@@ -4,3 +4,6 @@ nimcache
 # Binaries
 core_basic_window
 bunnymark
+
+# Raylib source
+src/raylib_src
