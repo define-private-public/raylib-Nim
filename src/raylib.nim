@@ -1,17 +1,16 @@
+{.deadCodeElim: on.}
+
 when defined(macosx):
   # Mac OS X
   const LIB_RAYLIB* = "libraylib.dylib"
   {.passL: "-L. -lraylib".}
-  {.deadCodeElim: on.}
-else:
+when defined(win32):
+  # Windows
+  const LIB_RAYLIB* = "libraylib_shared.dll"
+when defined(linux):
   # Linux
   const LIB_RAYLIB* = "libraylib.so"
   {.passL: "-lglfw -lGL -lopenal -lm -lpthread -ldl -lX11 -lXrandr -lXinerama -lXxf86vm -lXcursor".}
-
-  {.deadCodeElim: on.}
-
-# TODO windows
-
 
 const
   FLAG_SHOW_LOGO* = 1
